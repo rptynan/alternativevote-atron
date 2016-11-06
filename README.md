@@ -1,5 +1,5 @@
 AlternativeVote-atron
-===================
+=====================
 
 Takes a csv file as input (exported from Drupal Webform, see
 example_input.csv), runs and AV election on them (Christ's College JCR style)
