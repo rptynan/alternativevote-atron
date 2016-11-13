@@ -117,7 +117,7 @@ def get_ballots_for_postition(position, raw_votes):
     for vote in raw_votes:
         ballot = {X_CHOICE_KEYS[pref.split('_')[0]]: candidate
                   for pref, candidate in vote.items()
-                  if '_' + position in pref}
+                  if '_' + position in pref and not pref.startswith('is')}
         # Fill in second/third choices if not present
         ballot[2] = ballot[2] if 2 in ballot else NONE_VOTE
         ballot[3] = ballot[3] if 3 in ballot else NONE_VOTE
