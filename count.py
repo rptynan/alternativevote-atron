@@ -93,8 +93,8 @@ def run_count(position, ballots):
         lowest_candidate = min(round_results.keys(),
                                key=lambda k: round_results[k])
         if round_results[highest_candidate] >= quota:
-            print('\n**Candidate {0}, having exceded the quota on this round, '
-                  'is duly elected.**'.format(highest_candidate))
+            print('\n**Candidate {0}, having exceeded the quota on this round,'
+                  ' is duly elected.**'.format(highest_candidate))
             return (highest_candidate, round_results[highest_candidate])
         else:
             print('\n_Candidate {0}, having the lowest number of votes, is '
