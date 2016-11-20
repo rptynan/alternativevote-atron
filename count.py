@@ -5,10 +5,17 @@ import math
 
 # RONs and None Vote are not equivalent, RON is a candidate, None Vote is just
 # thrown out.
-# Quota is per position not including people who voted none in everything
+# None votes in front of preferences are ignored, e.g. first - None, second -
+# Alice, third - Bob is equivalent to first - Alice, second - Bob.
+# Quota is per position not including people who voted none in everything, and
+# is floor(half of that) + 1.
 # If only two candidates are left we forego the quota
-# If tie-break between lowest two candidates, look at all second preferences
-# and tie-break on that.
+# If tie-break between lowest two candidates, look at all second highest
+# preferences of remaining ballots (i.e. ones which still have valid candidates
+# left on them) and tie-break on that.
+# If ties continue to the end with only two candidates left and second and
+# third preferences don't break the tie, flip a coin (the chances of this every
+# happening are almost nil).
 
 # - None vote is empty string ''
 # - Only up to three preferences, should be labeled
@@ -63,7 +70,7 @@ def run_count(position, ballots):
     if NONE_VOTE in candidates:
         candidates.remove(NONE_VOTE)  # isn't a candidate
         ballots = eliminate(candidates, ballots)
-    quota = math.ceil(len(ballots) / 2)
+    quota = math.floor(len(ballots) / 2) + 1
 
     print('\n## Counting for position {0}, {1} votes cast, quota is {2}.'
           .format(position, len(ballots), quota))
